@@ -7,4 +7,9 @@ export default defineConfig({
     react(),
     reactRefresh(),
   ],
+  resolve: {
+    alias: {
+      '@assets': '/src/assets',
+    },
+  },
 });

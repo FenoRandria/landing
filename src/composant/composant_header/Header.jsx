@@ -11,6 +11,7 @@ const Header = ({nom='User', portefeuille=0, status=0}) => {
     return(
             <header>
                 <div className ="logo">
+                    
                     <img src="../../src/assets/img/logoWhite.png" alt=""/>
                 </div>
                 <nav>
