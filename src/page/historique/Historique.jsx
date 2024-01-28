@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Terrain_card from '../../composant/composant_terrain/Terrain_card';
+import Auth_token from '../../Auth_token';
 const Historique = () =>
 {
     const data = [
@@ -23,6 +24,7 @@ const Historique = () =>
     ];
  return (
     <div className="historique">
+        <Auth_token/>
          <div className="titre">
             <h1>Historique
                 des <span>terrains</span></h1>

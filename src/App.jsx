@@ -6,6 +6,7 @@ import Header from './composant/composant_header/Header';
 import Historique from './page/historique/Historique';
 import Result_search from './page/resulat_recherche/Result_search';
 import Login from './page/auth/Login';
+import Register from './page/auth/Register';
 import Message from './page/message/Message';
 
 
@@ -16,6 +17,9 @@ const App = ({url,nompage}) => {
           <Routes>
               <Route path="/page/login" element={<Login />}/>
           </Routes>
+          <Routes>
+              <Route path="/page/register" element={<Register />}/>
+          </Routes>
         <Header />
         <main>
           <Routes>
@@ -25,6 +29,7 @@ const App = ({url,nompage}) => {
             <Route path="/historique" element={<Historique />} />
             <Route  path="/recherche" element={<Result_search />} />
             <Route path="/message" element={< Message/>} />
+            <Route path="/list" element={< Historique/>} />
           </Routes>
         </main>
       </Router>

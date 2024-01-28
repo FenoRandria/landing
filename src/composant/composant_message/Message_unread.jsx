@@ -1,12 +1,12 @@
-const Message_unread = ({nombre_message = 20}) => {
+const Message_unread = ({nombre_membre = 20}) => {
     return(
         <article className="introduction">
             <div className="introNombreMessage">
                 <div className="titre">
-                    <h3>Message</h3>
+                    <h3>Membre(s)</h3>
                 </div>
                 <div className="nombre">
-                    <h3>{nombre_message}</h3>
+                    <h3>{nombre_membre}</h3>
                 </div>
                 <div className="membre">
                     <div className="mini-logo"></div>

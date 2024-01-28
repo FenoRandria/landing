@@ -1,19 +1,45 @@
-const Message_apercu = () => {
+const Message_apercu = ({className, nom, lastMessage, datemessage,onClicked}) => {
+    
+    function getEcartTime(dateHeureEnvoie) {
+        const currentDate = new Date();
+        const messageDate = new Date(dateHeureEnvoie[0], dateHeureEnvoie[1] - 1, dateHeureEnvoie[2], dateHeureEnvoie[3], dateHeureEnvoie[4], dateHeureEnvoie[5], dateHeureEnvoie[6] / 1e6);
+        const timeDifferenceInSeconds = Math.floor((currentDate - messageDate) / 1000);
+        if (timeDifferenceInSeconds < 60) {
+            return `${timeDifferenceInSeconds} seconds ago`;
+        } else if (timeDifferenceInSeconds < 3600) {
+            const minutes = Math.floor(timeDifferenceInSeconds / 60);
+            return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+        } else if (timeDifferenceInSeconds < 86400) {
+            const hours = Math.floor(timeDifferenceInSeconds / 3600);
+            return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+        } else if (timeDifferenceInSeconds < 2592000) {
+            const days = Math.floor(timeDifferenceInSeconds / 86400);
+            return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+        } else if (timeDifferenceInSeconds < 31536000) {
+            const months = Math.floor(timeDifferenceInSeconds / 2592000);
+            return `${months} ${months === 1 ? 'month' : 'months'} ago`;
+        } else {
+            const years = Math.floor(timeDifferenceInSeconds / 31536000);
+            return `${years} ${years === 1 ? 'year' : 'years'} ago`;
+        }
+    }
+    
     return (
-        <div className="messageOne">
-            <a href="">
+        <div className={className} onClick={onClicked}>
+            {/* <a href="/message?receiver=1"> */}
                 <div className="profile">
                     <img src="../../src/assets/img/Fytahina.jpg" alt=""/>
                 </div>
                 <div className="texte">
-                    <h1>Fy-Tahina Tatsimbazafy</h1>
-                    <p className="messageDernier">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi doloremque unde dolore aut. Officia distinctio quisquam ipsum obcaecati tempore pariatur dolor excepturi veritatis adipisci atque iure, animi odio exercitationem optio.</p>
+                    <h1>{nom}</h1>
+                    <p className="messageDernier">{lastMessage}</p>
                 </div>
                 <div className="hour">
-                    <h4>8Hour ago</h4>
+                    <h4>{getEcartTime(datemessage)}</h4>
                 </div>
-            </a>
+            {/* </a> */}
         </div>
-    )
-}
+    );
+};
+
 export default Message_apercu;
