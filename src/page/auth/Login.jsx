@@ -3,8 +3,8 @@ import apiUrl from '../../apiUrl';
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
   
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('essai@gmail.com');
+  const [password, setPassword] = useState('mdp');
   const [showError,setShowError] = useState('');
   const history = useNavigate();
   const seLogin = () => {
