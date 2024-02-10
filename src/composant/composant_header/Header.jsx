@@ -62,7 +62,7 @@ const Header = ({portefeuille=0}) => {
             <header>
                 <div className ="logo">
                     
-                    <img src="../../src/assets/img/logoWhite.png" alt=""/>
+                    <img src="/img/logoWhite.png" alt=""/>
                 </div>
                 <nav>
                     <div className ="menuNav">
@@ -77,7 +77,7 @@ const Header = ({portefeuille=0}) => {
                     <div className ="profilOUt">
                         <div className ="profil">
                             <div className ="imageProfile">
-                                <img src="../../src/assets/img/me.jpeg" alt=""/>
+                                <img src="/img/me.jpeg" alt=""/>
                             </div>
                             <div className ="infoProfile">
                               
@@ -98,9 +98,9 @@ const Header = ({portefeuille=0}) => {
                             <div className ="img">
                             {
                                 statusEnligne === 0 ? (
-                                    <img src="../../src/assets/img/logIn.png" alt="" />
+                                    <img src="/img/logIn.png" alt="" />
                                     ) : (
-                                    <img onClick={LogOut} src="../../src/assets/img/logOut.png" alt="" />
+                                    <img onClick={LogOut} src="/img/logOut.png" alt="" />
                                 )
                             }
                             </div>

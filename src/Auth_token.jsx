@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import apiUrl from './apiUrl';
+
 const Auth_token = () => {
 
     useEffect(() => {

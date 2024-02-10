@@ -1,7 +1,6 @@
 // import React, { useState } from 'react';
 
 import Nav_accueil from "../../composant/composant_navigation/Nav_accueil";
-import Video_youtube from "../../composant/video/Video_youtube";
 
 // import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 const Accueil = () =>
@@ -11,8 +10,7 @@ const Accueil = () =>
     <div className="accueil">
             <section className="image3D">
                 <div className="imgSecour">
-                    <img src="../../src/assets/img/photo_Accueil.png" alt=""/>
-                    {/* <Video_youtube /> */}
+                    <img src="/img/photo_Accueil.png" alt=""/>
                 </div>
             </section>
             <section className="Contenu">

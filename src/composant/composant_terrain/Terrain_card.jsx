@@ -2,7 +2,7 @@ const Terrain_card = ({terrain_detail = {id:0, nb_parcelle:0}}) => {
     return (
         <div className="liste">
             <div className="img">
-                <img src="../../src/assets/img/tarainResult.jpg" alt=""/>
+                <img src="/img/tarainResult.jpg" alt=""/>
             </div>
             <div className="contenu">
                 <div className="terrain">

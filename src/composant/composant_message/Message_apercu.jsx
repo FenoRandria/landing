@@ -33,7 +33,7 @@ const Message_apercu = ({className, nom, lastMessage, datemessage,onClicked}) =>
         <div className={className} onClick={onClicked}>
             {/* <a href="/message?receiver=1"> */}
                 <div className="profile">
-                    <img src="../../src/assets/img/Fytahina.jpg" alt=""/>
+                    <img src="  /img/Fytahina.jpg" alt=""/>
                 </div>
                 <div className="texte">
                     <h1>{nom}</h1>

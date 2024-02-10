@@ -50,13 +50,13 @@ const Login = () => {
             <div className="formulaire_login">
                 <div className="cloudAnimation">
                     <div className="imageCloud1">
-                        <img src="../../src/assets/img/Nuage.png" alt=""/>
+                        <img src="  /img/Nuage.png" alt=""/>
                     </div>
                     <div className="texte">
                         <h1>Login</h1>
                     </div>
                     <div className="imageCloud2">
-                        <img src="../../src/assets/img/Nuage.png" alt=""/>
+                        <img src="  /img/Nuage.png" alt=""/>
                     </div>
                 </div>
                 

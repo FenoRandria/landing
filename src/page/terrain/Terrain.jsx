@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Auth_token from '../../Auth_token';
 import FicheTerrain from '../../composant/ficheTerrain/FicheTerrain';
 const Terrain = () =>
 {
@@ -30,7 +29,7 @@ const Terrain = () =>
         <div className="AllListe">
             {
                 data.map(terrain =>(
-                    (<FicheTerrain />)
+                    (<FicheTerrain  />)
                 ))
             }
         </div>

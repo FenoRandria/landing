@@ -57,13 +57,13 @@ const Register = () => {
             <div className="formulaire_login">
                 <div className="cloudAnimation" style={{height:'230px'}}>
                     <div className="imageCloud1">
-                        <img src="../../src/assets/img/Nuage.png" alt=""/>
+                        <img src="  /img/Nuage.png" alt=""/>
                     </div>
                     <div className="texte">
                         <h1 style={{fontSize:'7rem'}}>Sign Up</h1>
                     </div>
                     <div className="imageCloud2">
-                        <img src="../../src/assets/img/Nuage.png" alt=""/>
+                        <img src="  /img/Nuage.png" alt=""/>
                     </div>
                 </div>
                 

@@ -5,7 +5,7 @@ const Search_bar = () => {
             <form action="recherche" method="get">
                 <input type="text" name="keyword" id="search" placeholder="Votre Recherche"/>
                 <button>
-                    <img src="../../src/assets/img/btnSearchnoneFOnd.png" alt=""/>
+                    <img src="  /img/btnSearchnoneFOnd.png" alt=""/>
                 </button>
             </form>
         </div>
