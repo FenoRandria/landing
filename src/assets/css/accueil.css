@@ -369,16 +369,44 @@ main .historique .titre h1 span {
   color: #c9cd16;
 }
 main .historique .AllListe {
-  width: 60%;
+  width: 50%;
   min-height: 700px;
   height: auto;
   display: flex;
   color: white;
-  overflow-y: scroll;
+  overflow-x: scroll;
   flex-direction: row;
-  gap: 3px;
-  flex-wrap: wrap;
-  align-content: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+}
+main .historique .AllListe::-webkit-scrollbar-track {
+  width: 5px;
+  background: hsla(33, 100%, 76%, 0.1);
+  border-radius: 50px;
+  height: 2px;
+}
+main .historique .AllListe::-webkit-scrollbar-thumb {
+  width: 2px;
+  height: 2px;
+  background: #ffc887;
+  background: linear-gradient(rgb(49, 49, 49), black, white, 90deg);
+  border-radius: 50px;
+  -webkit-transition: 3s ease-in-out;
+  transition: 3s ease-in-out;
+}
+main .historique .AllListe::-webkit-scrollbar-thumb:hover {
+  position: absolute;
+  padding: 5px;
+  width: 5px;
+}
+main .historique .AllListe::-webkit-scrollbar {
+  width: 5px;
+  position: absolute;
+}
+main .historique .AllListe ::-webkit-scrollbar-button {
+  width: 5px;
+  position: absolute;
 }
 main .historique .AllListe .liste {
   width: 250px;
@@ -448,16 +476,6 @@ main .historique .AllListe .contenu .parcelle .miniTitre h3 span {
   font-weight: 600;
   font-size: 5rem;
 }
-main .historique .AllListe::-webkit-scrollbar-track {
-  width: 10px;
-}
-main .historique .AllListe::-webkit-scrollbar-thumb {
-  width: 10px;
-  background: #c9cd16;
-}
-main .historique .AllListe::-webkit-scrollbar {
-  width: 10px;
-}
 main .resultatRecherchee {
   width: 100%;
   margin: auto;
@@ -484,15 +502,15 @@ main .resultatRecherchee .titre h1 span {
   color: #ffc887;
 }
 main .resultatRecherchee .AllListe {
-  width: 60%;
-  min-height: 700px;
+  width: 50%;
+  max-height: 70vh;
   height: auto;
   display: flex;
   color: white;
   overflow-y: scroll;
   flex-direction: row;
   gap: 3px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-content: center;
 }
 main .resultatRecherchee .AllListe .liste {
@@ -564,14 +582,14 @@ main .resultatRecherchee .AllListe .contenu .parcelle .miniTitre h3 span {
   font-size: 5rem;
 }
 main .resultatRecherchee .AllListe::-webkit-scrollbar-track {
-  width: 10px;
+  width: 5px;
 }
 main .resultatRecherchee .AllListe::-webkit-scrollbar-thumb {
-  width: 10px;
-  background: #c9cd16;
+  width: 5px;
+  background: #ffc887;
 }
 main .resultatRecherchee .AllListe::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 main .messenger {
   width: 100%;
@@ -745,14 +763,14 @@ main .messenger .chat .recent .AllMessage .messageOne:hover, main .messenger .ch
   background: hsla(11, 87%, 63%, 0.072);
 }
 main .messenger .chat .recent::-webkit-scrollbar-track {
-  width: 10px;
+  width: 5px;
 }
 main .messenger .chat .recent::-webkit-scrollbar-thumb {
-  width: 10px;
-  background: #c9cd16;
+  width: 5px;
+  background: #ffc887;
 }
 main .messenger .chat .recent::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 main .messenger .chat .detailsMessage {
   width: 60%;

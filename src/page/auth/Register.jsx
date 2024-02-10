@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import apiUrl from '../../apiUrl';
-import CryptoJS from 'crypto-js';
+ 
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -16,7 +16,6 @@ const Register = () => {
     fetch(`${apiUrl}/api/proprietaires/inscrire`, {
       method: 'POST',
       headers: {
-        "access-control-allow-origin" : "*",
         "Content-type": "application/json; charset=UTF-8"
       },
       body: JSON.stringify({
@@ -26,7 +25,6 @@ const Register = () => {
         mdp: mdp,
         cmdp: cmdp
       }),
-      credentials: 'include',
     })
       .then(response => {
         console.log(response.status)

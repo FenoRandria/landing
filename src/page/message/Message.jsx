@@ -1,10 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import Message_unread from '../../composant/composant_message/Message_unread';
-import Auth_token from '../../Auth_token';
 import Message_apercu from '../../composant/composant_message/Message_apercu';
 import apiUrl from '../../apiUrl';
-import CryptoJS from 'crypto-js';
 const Message = () => {
 const [lastMessagerie, setLastMessagerie] = useState([]);
 const [discussions, setDiscussions] = useState([]);
@@ -12,52 +9,96 @@ const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 const [elementActif, setElementActif] = useState(0);
 const [nomReceiver, setNomReceiver] = useState(null);
-const [idReceveur,setIdReceveur] = useState(null);
+const [idReceveur,setIdReceveur] = useState();
 const [idEnvoyeur,setIdEnvoyeur] = useState();
+const [proprietaires,setProprietaires] = useState([]);
 const [hafatra,setHafatra]=useState('');
-const [isState,setIsState]=useState(0);
 
-const history = useNavigate();
-useEffect(()=>{
-    groupF();
-},[])
-
-// await groupF;
-
-
-const groupF = async () =>{
+useEffect(() => {
     const token = sessionStorage.getItem('token');
-    console.log(token)
-    if (!token || token==null) {
-        history('/page/login');
-    }else {
-      var lists = token.split("*,y+*");
-      setIdEnvoyeur(parseInt(lists[1]));
-      if(lists.length === 2 && lists[0].toString() !== CryptoJS.SHA256(parseInt(lists[1])).toString()){
-        history('/page/login');
-      }
-    }
-}
 
-function formatDateTime(dateArray) {
-    const [year, month, day, hour, minute, second, millisecond] = dateArray;
+    if (!token) {
+        console.error("Token not available");
+        window.location.href="/page/login"
+        return;
+    }
+
+    fetch(`${apiUrl}/api/proprietaires/auth`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            "Content-type": "application/json; charset=UTF-8"
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error("Error in API call:", response.status, response.statusText);
+            return Promise.reject("Authentication failed");
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Response data:", data.data);
+        parseInt(data.data)
+        setIdEnvoyeur(data.data)
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        window.location.href="/page/login"
+
+    });
+}, []);
+
+
+
+function formatDateTime(dateTimeString) {
     const options = { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
-    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(new Date(year, month - 1, day, hour, minute, second, millisecond));
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(new Date(dateTimeString));
     return formattedDate.toUpperCase();
 }
 
 const CallAPI = () => {
     setLoading(true);
-    console.log(idEnvoyeur)
+    fetch(`${apiUrl}/api/proprietaires`, 
+    {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${sessionStorage.getItem('token').toString()}`,
+            "Content-type": "application/json; charset=UTF-8"
+            },
+    })
+    .then(response => {
+        console.log(response.status);
+        if (!response.ok) {
+            if (response.status === 500) {
+                return response.json().then(errorData => {
+                    setError(errorData.message);
+                    throw new Error(errorData.message);
+                });
+            }
+            throw new Error('Failed in list messages');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('proprietaires:', data.data);
+        setProprietaires(data.data)
+    })
+    .catch(error => {
+        console.error('API Error:', error.message);
+        setError('Failed to fetch data');
+    })
+    .finally(() => {
+        setLoading(false);
+    }); 
 
-    fetch(`${apiUrl}/api/proprietaires/discussions/last/${idEnvoyeur}`, 
+    fetch(`${apiUrl}/api/proprietaires/discussions/last/${sessionStorage.getItem('token').toString()}`, 
     {
         method: 'POST',
         headers: {
-                "access-control-allow-origin": "*",
-                "Content-type": "application/json; charset=UTF-8"
+            'Authorization': `Bearer ${sessionStorage.getItem('token').toString()}`,
+            "Content-type": "application/json; charset=UTF-8"
             },
-        credentials: 'include',
     })
     .then(response => {
         console.log(response.status);
@@ -89,14 +130,14 @@ function getDiscussions() {
     fetch(`${apiUrl}/api/proprietaires/discussions`, {
         method: 'POST',
         headers: {
-            "access-control-allow-origin": "*",
+            'Authorization': `Bearer ${sessionStorage.getItem('token').toString()}`,
             "Content-type": "application/json; charset=UTF-8"
         },
         body: JSON.stringify({
-            idEnvoyeur: idEnvoyeur,
+            idEnvoyeur:idEnvoyeur,
             idReceveur:idReceveur
         }),
-        credentials: 'include',
+        // credentials: 'include',
     })
     .then(response => {
         console.log(response.status);
@@ -127,7 +168,7 @@ function getDiscussions() {
 
 useEffect(() => {
     CallAPI();
-    if(idEnvoyeur !==null && idReceveur!==null){
+    if(idEnvoyeur !==null && idReceveur!==null && idEnvoyeur !== undefined && idReceveur !== undefined){
         getDiscussions();
     }
 }, [idEnvoyeur,idReceveur]);
@@ -144,7 +185,7 @@ const sendHafatra = () => {
     fetch(`${apiUrl}/api/proprietaires/messagerie`, {
       method: 'POST',
       headers: {
-        "access-control-allow-origin" : "*",
+        'Authorization': `Bearer ${sessionStorage.getItem('token').toString()}`,
         "Content-type": "application/json; charset=UTF-8"
       },
       body: JSON.stringify({
@@ -153,7 +194,6 @@ const sendHafatra = () => {
         idReceveur: idReceveur,
         status: 1
       }),
-      credentials: 'include',
     })
       .then(response => {
         console.log(response.status)
@@ -181,8 +221,8 @@ const sendHafatra = () => {
 // ------------------------------------------------
  return (
     <section className="messenger">
-        <Auth_token/>
-        <Message_unread nombre_membre ={12} />
+        {/* <Auth_token/> */}
+        <Message_unread nombre_membre ={proprietaires?.length-1} />
         <article className="chat">
             <div className="recent">
                 <div className="titre">
@@ -190,24 +230,48 @@ const sendHafatra = () => {
                 </div>
                 <div className="AllMessage">
                     {
-                            lastMessagerie.map((messagerie, index) =>  {
-                                if (parseInt(messagerie.envoyeur.id) !== idEnvoyeur) {
-                                    return (<Message_apercu
-                                        key={index}
-                                        className={`messageOne ${index === elementActif ? 'active' : ''}`}
-                                        nom={messagerie.envoyeur.nom}
-                                        lastMessage={messagerie.messagerie.message}
-                                        datemessage={messagerie.messagerie.dateHeureEnvoie}
-                                        onClicked={(e) => {
-                                            e.preventDefault();
-                                            console.log("Clicked:", messagerie.envoyeur.id);
-                                            setNomReceiver(messagerie.envoyeur.nom);
-                                            setIdReceveur(messagerie.envoyeur.id);
-                                            setElementActif(index);
-                                        }}    
-                                        type="submit"                            
-                                    />)
-                            } })
+                        lastMessagerie.map((messagerie, index) =>  {
+                            if (parseInt(messagerie.envoyeur.id) !== parseInt(idEnvoyeur)) {
+                                return (<Message_apercu
+                                    key={index}
+                                    className={`messageOne ${index === elementActif ? 'active' : ''}`}
+                                    nom={messagerie.envoyeur.nom}
+                                    lastMessage={messagerie.messagerie.message}
+                                    datemessage={messagerie.messagerie.dateHeureEnvoie}
+                                    onClicked={(e) => {
+                                        e.preventDefault();
+                                        console.log("Clicked:", messagerie.envoyeur.id);
+                                        setNomReceiver(messagerie.envoyeur.nom);
+                                        setIdReceveur(messagerie.envoyeur.id);
+                                        setElementActif(index);
+                                    }}    
+                                    type="submit"                            
+                                />)
+                        }})
+                        
+                    }
+                    {
+                        proprietaires.map((proprietaire, index) =>  {
+                            console.log(proprietaire.id)
+                            const idNotFoundInLastMessagerie = lastMessagerie.every(messagerie => parseInt(messagerie.envoyeur.id) !== parseInt(proprietaire.id));
+                            if (idNotFoundInLastMessagerie) {
+                            if (parseInt(proprietaire.id) !== parseInt(idEnvoyeur)) {
+                                return (<Message_apercu
+                                    key={index}
+                                    className={`messageOne`}
+                                    nom={proprietaire.nom}
+                                    lastMessage="start message"
+                                    // datemessage={"now"}
+                                    onClicked={(e) => {
+                                        e.preventDefault();
+                                        console.log("Clicked:", proprietaire.id);
+                                        setNomReceiver(proprietaire.nom);
+                                        setIdReceveur(proprietaire.id);
+                                        setElementActif(index);
+                                    }}    
+                                    type="submit"                            
+                                />)
+                        } }  })
                     }
                 </div>
             </div>
@@ -227,7 +291,7 @@ const sendHafatra = () => {
                 <div className="allCommChat">
                     { 
                         discussions?.slice()?.reverse()?.map((discussions, index) => {
-                            if (parseInt(discussions.envoyeur.id) === parseInt(sessionStorage.getItem("token").split("*,y+*")[1])) {
+                            if (parseInt(discussions.envoyeur.id) === parseInt(idEnvoyeur)) {
                                 return (
                                     <div className="sender" key={index}>
                                         <div className="pdp">
@@ -251,7 +315,7 @@ const sendHafatra = () => {
                                         </div>
                                     </div>
                                 );
-                            }
+                            } 
                         })
                     }
 
@@ -287,7 +351,7 @@ export default Message;
 // import Auth_token from '../../Auth_token';
 // import Message_apercu from '../../composant/composant_message/Message_apercu';
 // import apiUrl from '../../apiUrl';
-// import CryptoJS from 'crypto-js';
+//  
 
 // const Message = () => {
 //   const [lastMessagerie, setLastMessagerie] = useState([]);

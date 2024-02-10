@@ -1,0 +1,93 @@
+.fichier{
+    width: 90%;
+    height: 650px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+    .fichierOne{
+        width: 420px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+        background: #181818;
+        border-radius: 50px;
+        overflow: hidden;
+        color: white;
+        .image{
+            width: 95%;
+            height: 400px;
+            background: #f36e50;
+            /* background-image: url(../img/fichierPic.jpg); */
+            background-size: cover;
+            margin: auto;
+            border-radius: 40px;
+            margin-top: 11px;
+            .texte{
+                width: 80%;
+                margin: auto;
+                h1{
+                    width: 30%;
+                    font-size: 3rem;
+                    font-weight: 700;
+                }
+            }
+    
+        }
+        .typeCulture{
+            min-width: 95%;
+            height: 100px;
+            background: #ffffff0d;
+            border-radius: 40px;
+            margin: auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .nom{
+                width: 40%;
+                height: 100px;
+                h2{
+                    font-size: 2rem;
+                    margin: 15px 0px;
+                    margin-bottom: 0;
+                }
+                p{
+                    font-size: 0.8rem;
+                    color: rgba(255, 255, 255, 0.502);
+                    font-weight: 200;
+                    margin-top: 5px;
+                }
+            }
+            .partielle{
+                width: 30%;
+                height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                h4{
+                    color: rgba(255, 255, 255, 0.529);
+                    font-weight: 100;
+                    font-size: 1.2REM;
+
+                }
+            }
+        }
+        .terrain{
+            width: 95%;
+            height: 100px;
+            background: #ffffff0d;
+            border-radius: 40px;
+            margin: auto;
+            margin-bottom: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: orange;
+            text-transform: uppercase;
+        }
+
+    }
+
+}

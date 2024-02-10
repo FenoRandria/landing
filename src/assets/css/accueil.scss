@@ -419,16 +419,50 @@ main {
         }
 
         .AllListe {
-            width: 60%;
+            width: 50%;
             min-height: 700px;
             height: auto;
             display: flex;
             color: white;
-            overflow-y: scroll;
+            overflow-x: scroll;
             flex-direction: row;
-            gap: 3px;
-            flex-wrap: wrap;
-            align-content: center;
+            gap: 10px;
+            flex-wrap: nowrap;
+        
+            &::-webkit-scrollbar-track {
+                width: 5px;
+                background: hsla(33, 100%, 76%, 0.1);
+                border-radius: 50px;
+                
+                height: 2px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                width: 2px;
+                height: 2px;
+                background: $orange;
+                background: linear-gradient(rgb(49, 49, 49), black, white, 90deg);
+                border-radius: 50px;
+                transition: 3s ease-in-out;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+                position: absolute;
+                padding: 5px;
+                width: 5px;
+            }
+
+            &::-webkit-scrollbar {
+                width: 5px;
+                position: absolute;
+            }
+            
+            ::-webkit-scrollbar-button{
+                width: 5px;
+                position: absolute;
+            }
+            overflow-y: hidden;
+          
 
             .liste {
                 width: 250px;
@@ -509,18 +543,18 @@ main {
             }
         }
 
-        .AllListe::-webkit-scrollbar-track {
-            width: 10px;
-        }
+        // .AllListe::-webkit-scrollbar-track {
+        //     width: 5px;
+        // }
 
-        .AllListe::-webkit-scrollbar-thumb {
-            width: 10px;
-            background: $vert;
-        }
+        // .AllListe::-webkit-scrollbar-thumb {
+        //     width: 5px;
+        //     background: $orange;
+        // }
 
-        .AllListe::-webkit-scrollbar {
-            width: 10px;
-        }
+        // .AllListe::-webkit-scrollbar {
+        //     width: 5px;
+        // }
     }
 
     .resultatRecherchee {
@@ -552,15 +586,15 @@ main {
         }
 
         .AllListe {
-            width: 60%;
-            min-height: 700px;
+            width: 50%;
+            max-height: 70vh;
             height: auto;
             display: flex;
             color: white;
             overflow-y: scroll;
             flex-direction: row;
             gap: 3px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             align-content: center;
 
             .liste {
@@ -643,16 +677,16 @@ main {
         }
 
         .AllListe::-webkit-scrollbar-track {
-            width: 10px;
+            width: 5px;
         }
 
         .AllListe::-webkit-scrollbar-thumb {
-            width: 10px;
-            background: $vert;
+            width: 5px;
+            background: $orange;
         }
 
         .AllListe::-webkit-scrollbar {
-            width: 10px;
+            width: 5px;
         }
 
     }
@@ -857,16 +891,16 @@ main {
             }
 
             .recent::-webkit-scrollbar-track {
-                width: 10px;
+                width: 5px;
             }
 
             .recent::-webkit-scrollbar-thumb {
-                width: 10px;
-                background: $vert;
+                width: 5px;
+                background: $orange;
             }
 
             .recent::-webkit-scrollbar {
-                width: 10px;
+                width: 5px;
             }
 
             .detailsMessage {

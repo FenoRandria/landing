@@ -29,7 +29,7 @@ const Historique = () =>
             <h1>Historique
                 des <span>terrains</span></h1>
         </div>
-        <div className="AllListe">
+        <div className="AllListe" style={{ height:'400px'}}>
             {
                 data.map(terrain =>(
                     ( <Terrain_card  terrain_detail={terrain}/> )

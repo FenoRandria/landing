@@ -3,7 +3,7 @@ const Message_unread = ({nombre_membre = 20}) => {
         <article className="introduction">
             <div className="introNombreMessage">
                 <div className="titre">
-                    <h3>Membre(s)</h3>
+                    <h3>Autres Membre(s)</h3>
                 </div>
                 <div className="nombre">
                     <h3>{nombre_membre}</h3>

@@ -2,9 +2,13 @@ const Message_apercu = ({className, nom, lastMessage, datemessage,onClicked}) =>
     
     function getEcartTime(dateHeureEnvoie) {
         const currentDate = new Date();
-        const messageDate = new Date(dateHeureEnvoie[0], dateHeureEnvoie[1] - 1, dateHeureEnvoie[2], dateHeureEnvoie[3], dateHeureEnvoie[4], dateHeureEnvoie[5], dateHeureEnvoie[6] / 1e6);
+        const messageDate = new Date(dateHeureEnvoie);
         const timeDifferenceInSeconds = Math.floor((currentDate - messageDate) / 1000);
-        if (timeDifferenceInSeconds < 60) {
+    
+        if (timeDifferenceInSeconds < 0) {
+            // The specified date is in the future
+            return 'In the future';
+        } else if (timeDifferenceInSeconds < 60) {
             return `${timeDifferenceInSeconds} seconds ago`;
         } else if (timeDifferenceInSeconds < 3600) {
             const minutes = Math.floor(timeDifferenceInSeconds / 60);
@@ -23,6 +27,7 @@ const Message_apercu = ({className, nom, lastMessage, datemessage,onClicked}) =>
             return `${years} ${years === 1 ? 'year' : 'years'} ago`;
         }
     }
+    
     
     return (
         <div className={className} onClick={onClicked}>

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import apiUrl from '../../apiUrl';
-import CryptoJS from 'crypto-js';
 import { useNavigate } from 'react-router-dom';
-
 const Login = () => {
   
   const [email, setEmail] = useState('');
@@ -14,14 +12,12 @@ const Login = () => {
     fetch(`${apiUrl}/api/proprietaires/login`, {
       method: 'POST',
       headers: {
-        "access-control-allow-origin" : "*",
         "Content-type": "application/json; charset=UTF-8"
       },
       body: JSON.stringify({
         mail: email,
         mdp: password,
       }),
-      credentials: 'include',
     })
       .then(response => {
         console.log(response.status)
@@ -38,9 +34,7 @@ const Login = () => {
       })
       .then(data => {
         console.log('Login successful:', data);
-        var id_user = data.data.id;
-        sessionStorage.setItem('token',CryptoJS.SHA256(id_user).toString()+'*,y+*'+id_user);
-        sessionStorage.setItem('nom', data.data.nom);
+        sessionStorage.setItem('token',data.data);
         history("/message");
       })
       .catch(error => {

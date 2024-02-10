@@ -8,6 +8,7 @@ import Result_search from './page/resulat_recherche/Result_search';
 import Login from './page/auth/Login';
 import Register from './page/auth/Register';
 import Message from './page/message/Message';
+import Terrain from './page/terrain/Terrain';
 
 
 const App = ({url,nompage}) => {
@@ -29,7 +30,7 @@ const App = ({url,nompage}) => {
             <Route path="/historique" element={<Historique />} />
             <Route  path="/recherche" element={<Result_search />} />
             <Route path="/message" element={< Message/>} />
-            <Route path="/list" element={< Historique/>} />
+            <Route path="/list" element={< Terrain />} />
           </Routes>
         </main>
       </Router>

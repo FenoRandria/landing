@@ -1,40 +1,63 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, BrowserRouter as Router } from 'react-router-dom';
 import Search_bar from "./Search_bar";
-import CryptoJS from "crypto-js";
+import apiUrl from "../../apiUrl";
 
 const Header = ({portefeuille=0}) => {
     const [activeLink, setActiveLink] = useState('accueil');
     const [statusEnligne, setStatusEnligne] = useState(0)
-    const [nom, setNom] = useState('user')
-    const token = sessionStorage.getItem("token");
+    const [nom, setNom] = useState(undefined)
+    const token = sessionStorage.getItem('token');
+    const [show,setShow] = useState(false)
+
+    const getUser = async (token)=>{
+        if (token) {
+            fetch(`${apiUrl}/api/proprietaires/token`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+            })
+            .then(response => response.json()
+                // if (!response.ok) {
+                //     console.error("Error in API call:", response.status, response.statusText);
+                //     return Promise.reject("Authentication failed");
+                // }
+            )
+            .then(data => {
+                console.log("Response data:", data.data);
+                setNom(data.data.nom);
+                setStatusEnligne(1);
+                setShow(true)
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        }
+    }
+
+
+    
     
     useEffect(() => {
-        const fetchData = () => {
-            const nom = sessionStorage.getItem("nom") ?? 'user';
-            setNom(nom);
-            const token = sessionStorage.getItem("token");
-            if (token) {
-                var lists = token.split("*,y+*");
-                if (lists.length === 2 && lists[0].toString() === CryptoJS.SHA256(parseInt(lists[1])).toString()) {
-                    setStatusEnligne(1);
-                }
-            }
-        };
-        fetchData();
-        const intervalId = setInterval(fetchData, 500);
-        return () => clearInterval(intervalId);
-    }, []);
+
+        const get = async(token)=>{
+            await getUser(token);
+        }
+        get(token);
+    }, [token,nom]);
 
     const handleLinkClick = (link) => {
-      setActiveLink(link);
+        setActiveLink(link);
     };
-    const LogOut = () =>{
+
+    const LogOut = () => {
         sessionStorage.removeItem("token");
         sessionStorage.removeItem("nom");
         setStatusEnligne(0);
         setNom('user');
-    } 
+    };
     return(
             <header>
                 <div className ="logo">
@@ -57,7 +80,8 @@ const Header = ({portefeuille=0}) => {
                                 <img src="../../src/assets/img/me.jpeg" alt=""/>
                             </div>
                             <div className ="infoProfile">
-                                <h3>{nom}</h3>
+                              
+                                <h3>{nom?nom:'user'}</h3>
                                 <p>{portefeuille} Point</p>
                             </div>
                         </div>
