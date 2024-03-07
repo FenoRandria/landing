@@ -13,15 +13,15 @@ const FicheTerrain = (props) => {
                 </div>
                 <div className="typeCulture">
                     <div className="nom">
-                        <h2>Sosety</h2>
-                        <p>Sweet, curved yellow fruit</p>
+                        <h2>{props.nomcategorie}</h2>
+                        <p>Sweet, curved yellow fruit or legume</p>
                     </div>
                     <div className="partielle">
-                        <h4>Parcel 1</h4>
+                        <h4>{props.id_parcelle}</h4>
                     </div>
                 </div>
                 <div className="terrain">
-                    <h1>Terrain-08</h1>
+                    <h1>Terrain-{props.id_terrain}</h1>
                 </div>
             </div>
         </section>

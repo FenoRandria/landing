@@ -1,4 +1,4 @@
-const Terrain_card = ({terrain_detail = {id:0, nb_parcelle:0}}) => {
+const Terrain_card = ({terrain_detail = {id_terrain:0, id_proprietaire:0}}) => {
     return (
         <div className="liste">
             <div className="img">
@@ -6,11 +6,11 @@ const Terrain_card = ({terrain_detail = {id:0, nb_parcelle:0}}) => {
             </div>
             <div className="contenu">
                 <div className="terrain">
-                    <h3>Terrain <span>{terrain_detail.id}</span></h3>
+                    <h3>Terrain <span>{terrain_detail.id_terrain}</span></h3>
                 </div>
                 <div className="parcelle">
                     <div className="miniTitre">
-                        <h3>Parcelle: <span>{terrain_detail.nb_parcelle}</span></h3>
+                        <h3>Ref. Proprietaire: <span>{terrain_detail.id_proprietaire}</span></h3>
                     </div>
                 </div>
             </div>
